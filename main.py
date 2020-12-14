@@ -2,6 +2,8 @@ import numpy as np
 from ProblemInstance import ProblemInstance
 import json
 import os
+from instance_test import execute
+import pandas as pd
 
 
 # w_t - waga czasu
@@ -81,11 +83,21 @@ def readInstanceFromFile(instanceName):
         instance['w_e']
     )
 
+def main():
+    # Generate test instances
+    saveToFile(0.5, 0.5, 7, 10, 2, 1, 40, 20, 40, 20, 40, 2, 'testowa')
+
+    df_results = pd.DataFrame()
+    columns = ['file', 'optimization_score', 'solver_score', 'optimization_time', 'solver_time']
+    for file in os.listdir('./instances'):
+        instance = readInstanceFromFile(file[:-5])
+        (optimization_score, optimization_time, solver_score, solver_time) = execute(instance)
+        df = pd.DataFrame([[file, optimization_score, solver_score, optimization_time, solver_time]], columns=columns)
+        df_results = df_results.append(df, ignore_index=True)
+    # save results to excel
+    df_results.to_excel('results.xlsx')
 
 
-saveToFile(0.5, 0.5, 10, 3, 2, 1, 40, 20, 40, 20, 40, 2, 'testowa')
 
-o = readInstanceFromFile("testowa0")
-print(o)
-
-
+if __name__ == "__main__":
+    main()
