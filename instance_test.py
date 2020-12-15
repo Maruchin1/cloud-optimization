@@ -9,7 +9,9 @@ def execute(instance):
     start = time.time()
     optimization_solution = _execute_optimization(instance)
     optimization_time = time.time() - start
-    optimization_score = _calculate_score(instance, optimization_solution)
+    optimization_score = None
+    if optimization_solution is not None:
+        optimization_score = _calculate_score(instance, optimization_solution)
     print(optimization_time)
     print('Optimization solution')
     print(optimization_solution)
@@ -19,12 +21,15 @@ def execute(instance):
     start = time.time()
     solver_solution = _execute_solver(instance)
     solver_time = time.time() - start
-    solver_score = _calculate_score(instance, solver_solution)
+    solver_score = None
+    if solver_solution is not None:
+        solver_score = _calculate_score(instance, solver_solution)
     print('Solver solution')
     print(solver_solution)
     print('Score:', solver_score)
     print()
     return optimization_score, optimization_time, solver_score, solver_time
+
 
 def _execute_optimization(instance):
     independent = IndependentOptimization(instance)
