@@ -45,8 +45,8 @@ class InstanceGenerator:
         tasks_subtasks = np.random.randint(low=1, high=self.m, size=self.s)
         tasks_subtasks = np.sort(tasks_subtasks)
 
-        T = tasks_subtasks * 15
-        M = T * 2
+        T = tasks_subtasks * 10
+        M = T + 20
 
         return ProblemInstance(p, t_peak, tasks_subtasks, T, M, self.w_t, self.w_e)
 

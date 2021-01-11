@@ -2,10 +2,9 @@ import pandas as pd
 from instance_generator import InstanceGenerator
 from instance_test import execute
 
-
-test_name = 'time_small'
-num_of_machines = 5
-num_of_tasks = 3
+test_name = 'time_medium'
+num_of_machines = 10
+num_of_tasks = 6
 num_of_instances = 10
 
 

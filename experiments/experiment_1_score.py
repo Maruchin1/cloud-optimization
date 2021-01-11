@@ -3,9 +3,9 @@ from instance_generator import InstanceGenerator
 from instance_test import execute
 
 
-test_name = 'score_small'
-num_of_machines = 5
-num_of_tasks = 3
+test_name = 'score_medium'
+num_of_machines = 10
+num_of_tasks = 6
 num_of_instances = 10
 
 

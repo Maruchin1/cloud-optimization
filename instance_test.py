@@ -3,22 +3,53 @@ from independend_optimization import IndependentOptimization
 from evolutionary_optimization import EvolutionaryOptimization
 from solver import Solver
 import time
-from multiprocessing import Process
+from multiprocessing import Process, Value
 
+# Timeout in seconds
+timeout = 5 * 60
 
 def execute(instance):
     print('Executing test')
     print()
 
-    optimization_test = InstanceTest(instance, 'Optimization Test')
+    optimization_score = Value('f', -1.0)
+    optimization_time = Value('f', -1.0)
+    solver_score = Value('f', -1.0)
+    solver_time = Value('f', -1.0)
+
+    print('Testing optimization')
+    optimization_process = Process(target=run_optimization, args=(instance, optimization_score, optimization_time))
+    optimization_process.start()
+    optimization_process.join(timeout=timeout)
+    optimization_process.terminate()
+    print('Score:', optimization_score.value)
+    print('Time:', optimization_time.value)
+    print()
+
+    print('Testing solver')
+    solver_process = Process(target=run_solver, args=(instance, solver_score, solver_time))
+    solver_process.start()
+    solver_process.join(timeout=timeout)
+    solver_process.terminate()
+    print('Score:', solver_score.value)
+    print('Time:', solver_time.value)
+    print()
+
+    return optimization_score.value, optimization_time.value, solver_score.value, solver_time.value
+
+
+def run_optimization(i, s, t):
+    optimization_test = InstanceTest(i, 'Optimization Test')
     optimization_test.execute_optimization()
-    optimization_test.print_results()
+    s.value = optimization_test.score
+    t.value = optimization_test.time
 
-    solver_test = InstanceTest(instance, 'Solver Test')
+
+def run_solver(i, s, t):
+    solver_test = InstanceTest(i, 'Solver Test')
     solver_test.execute_solver()
-    solver_test.print_results()
-
-    return optimization_test.score, optimization_test.time, solver_test.score, solver_test.time
+    s.value = solver_test.score
+    t.value = solver_test.time
 
 
 class InstanceTest:
