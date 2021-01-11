@@ -3,9 +3,9 @@ from instance_generator import InstanceGenerator
 from instance_test import execute
 
 
-test_name = 'score_medium'
-num_of_machines = 10
-num_of_tasks = 6
+test_name = 'weights_6_4'
+weight_of_time = 0.6
+weight_of_cost = 0.4
 num_of_instances = 10
 
 
@@ -13,8 +13,8 @@ def run_experiment():
     print('Starting experiment:', test_name)
     generator = InstanceGenerator()
     generator.test_name = test_name
-    generator.m = num_of_machines
-    generator.s = num_of_tasks
+    generator.w_t = weight_of_time
+    generator.w_e = weight_of_cost
     generator.num_of_instances = num_of_instances
     instances_arr = generator.generate_instances()
     print('Instances generated')

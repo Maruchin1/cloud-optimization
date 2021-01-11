@@ -17,8 +17,8 @@ class InstanceGenerator:
 
     def __init__(self):
         self.test_name = 'test'
-        self.m = 5
-        self.s = 3
+        self.m = 7
+        self.s = 4
         self.p_low = 1
         self.p_high = 2
         self.t_peak_low = 2
@@ -45,8 +45,8 @@ class InstanceGenerator:
         tasks_subtasks = np.random.randint(low=1, high=self.m, size=self.s)
         tasks_subtasks = np.sort(tasks_subtasks)
 
-        T = tasks_subtasks * 15
-        M = T * 2
+        T = tasks_subtasks * 10
+        M = T + 20
 
         return ProblemInstance(p, t_peak, tasks_subtasks, T, M, self.w_t, self.w_e)
 
