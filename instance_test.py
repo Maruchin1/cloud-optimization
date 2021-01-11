@@ -7,7 +7,7 @@ from multiprocessing import Process
 
 
 def execute(instance):
-    print('--- Executing test')
+    print('Executing test')
     print()
 
     optimization_test = InstanceTest(instance, 'Optimization Test')
