@@ -12,7 +12,7 @@ class IndependentOptimization:
         self.w_e = instance.w_e
 
     def execute(self):
-        a = np.zeros((3, 5))
+        a = np.zeros((self.t_peak.shape[0], self.t_peak.shape[1]))
         for i in range(len(self.tasks_subtasks)):
             a[i] = self._optimize_single(i)
         return a
