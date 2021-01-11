@@ -17,8 +17,8 @@ class InstanceGenerator:
 
     def __init__(self):
         self.test_name = 'test'
-        self.m = 5
-        self.s = 3
+        self.m = 7
+        self.s = 4
         self.p_low = 1
         self.p_high = 2
         self.t_peak_low = 2
