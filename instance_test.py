@@ -6,9 +6,10 @@ import time
 from multiprocessing import Process, Value
 
 # Timeout in seconds
-timeout = 5 * 60
+timeout = 1 * 60
 
-def execute(instance):
+
+def execute_test(instance):
     print('Executing test')
     print()
 
@@ -35,7 +36,7 @@ def execute(instance):
     print('Time:', solver_time.value)
     print()
 
-    return optimization_score.value, optimization_time.value, solver_score.value, solver_time.value
+    return optimization_score.value, solver_score.value, optimization_time.value, solver_time.value
 
 
 def run_optimization(i, s, t):
