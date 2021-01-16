@@ -1,6 +1,6 @@
 import pandas as pd
 from instance_generator import InstanceGenerator
-from instance_test import execute
+from instance_test import execute_test
 
 
 test_name = 'weights_6_4'
@@ -23,7 +23,7 @@ def run_experiment():
     results_storage = ResultsStorage()
     for num, instance in enumerate(instances_arr, start=1):
         print('Testing instance', num)
-        (optimization_score, _, solver_score, _) = execute(instance)
+        (optimization_score, _, solver_score, _) = execute_test(instance)
         results_storage.add_result(optimization_score, solver_score)
     print('Testing finished')
 
